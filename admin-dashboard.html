@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gimi Admin - لوحة التحكم</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="lang-ar admin-layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="logo">Gimi</a>
+            <span class="badge" style="background: rgba(255,255,255,0.2); margin-top: 5px;">الإدارة</span>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#dashboard" class="nav-item active" onclick="switchTab('dashboard')">الرئيسية</a>
+            <a href="#products" class="nav-item" onclick="switchTab('products')">المنتجات</a>
+            <a href="#merchants" class="nav-item" onclick="switchTab('merchants')">التجار والصلاحيات</a>
+        </nav>
+        <div class="sidebar-footer">
+            <button onclick="logoutAdmin()" class="btn btn-danger w-100" style="font-size: 0.9rem;">تسجيل خروج</button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="topbar">
+            <h2>لوحة تحكم المدير</h2>
+            <div class="user-info">
+                مرحباً، <strong id="admin-name">Admin</strong>
+            </div>
+        </header>
+
+        <div class="content-wrapper">
+            
+            <!-- Dashboard Tab -->
+            <div id="tab-dashboard" class="tab-content active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>إجمالي المنتجات</h3>
+                        <div class="stat-value" id="stat-products">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>التجار المسجلين</h3>
+                        <div class="stat-value" id="stat-merchants">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>التجار بانتظار الموافقة</h3>
+                        <div class="stat-value" id="stat-pending">0</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Tab -->
+            <div id="tab-products" class="tab-content">
+                <div class="flex-between" style="margin-bottom: 24px;">
+                    <h3>إدارة المنتجات</h3>
+                    <button class="btn btn-primary" onclick="openProductModal()">+ إضافة منتج جديد</button>
+                </div>
+                
+                <div class="card table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>الرقم</th>
+                                <th>صورة</th>
+                                <th>الاسم</th>
+                                <th>السعر</th>
+                                <th>إجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="products-table-body">
+                            <!-- Products injected via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Merchants Tab -->
+            <div id="tab-merchants" class="tab-content">
+                <div class="flex-between" style="margin-bottom: 24px;">
+                    <h3>إدارة التجار والصلاحيات</h3>
+                    <button class="btn btn-primary" onclick="openMerchantModal()">+ إضافة تاجر جديد</button>
+                </div>
+
+                <div class="card table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>رقم التاجر</th>
+                                <th>اسم المتجر</th>
+                                <th>رقم الهاتف</th>
+                                <th>الحالة / الصلاحيات</th>
+                                <th>إجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="merchants-table-body">
+                            <!-- Merchants injected via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Modals -->
+    
+    <!-- Add Product Modal -->
+    <div id="product-modal" class="modal-overlay">
+        <div class="modal-content info-banner">
+            <h3 style="margin-bottom: 20px;">إضافة منتج جديد</h3>
+            <form id="add-product-form">
+                <div class="form-group">
+                    <label>الاسم (عربي)</label>
+                    <input type="text" id="p-name-ar" class="form-control" required>
+                </div>
+                <div class="row">
+                    <div class="col form-group">
+                        <label>السعر (شيكل)</label>
+                        <input type="number" id="p-price" class="form-control" required>
+                    </div>
+                    <div class="col form-group">
+                        <label>سعر قديم (اختياري)</label>
+                        <input type="number" id="p-old-price" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>رابط الصورة</label>
+                    <input type="url" id="p-image" class="form-control" placeholder="https://..." required>
+                </div>
+                <div class="flex-between mt-4">
+                    <button type="button" class="btn" style="background:#e9ecef" onclick="closeModal('product-modal')">إلغاء</button>
+                    <button type="submit" class="btn btn-primary">حفظ المنتج</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <!-- We still need basic product data but logic is managed locally in admin.js -->
+    <script src="js/data.js"></script>
+    <script src="js/admin.js"></script>
+    <script>
+        // Init Admin Dashboard
+        document.addEventListener('DOMContentLoaded', initAdminDashboard);
+    </script>
+</body>
+</html>

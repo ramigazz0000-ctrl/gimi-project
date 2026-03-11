@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="title">Gimi - منتجات التجار المحليين</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Inter:wght@400;500;600;700&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="lang-ar">
+
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">Gimi</a>
+            <div class="controls">
+                <select id="lang-select">
+                    <option value="ar">العربية</option>
+                    <option value="he">עברית</option>
+                    <option value="en">English</option>
+                    <option value="ru">Русский</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <h1 data-i18n="heroTitle">منتجات التجار المحليين في إسرائيل</h1>
+            <p data-i18n="heroSubtitle">مع توصيل للبيت والدفع عند الاستلام. تصفح واطلب بسهولة عبر واتساب.</p>
+            <div class="hero-features">
+                <span data-i18n="feature0">✔ توصيل إلى المنزل</span>
+                <span data-i18n="feature1">✔ الدفع عند الاستلام</span>
+                <span data-i18n="feature2">✔ منتجات من تجار داخل إسرائيل</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deal of the Day -->
+    <section id="deal-section" class="bg-light">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title" data-i18n="dealOfDay">🔥 عرض اليوم</h2>
+            </div>
+            <div id="deal-of-day-container" class="products-grid">
+                <!-- Products will be injected here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Most Popular -->
+    <section>
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title" data-i18n="mostPopular">الأكثر طلبًا</h2>
+            </div>
+            <div id="popular-products-container" class="products-grid">
+                <!-- Products will be injected here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- All Products -->
+    <section class="bg-light">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title" data-i18n="products">المنتجات</h2>
+            </div>
+            <div id="all-products-container" class="products-grid">
+                <!-- Products will be injected here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Points Program -->
+    <section>
+        <div class="container">
+            <div class="info-banner points-card">
+                <h2 data-i18n="pointsTitle">برنامج النقاط والمكافآت</h2>
+                <p data-i18n="pointsDesc">شارك الموقع واربح جوائز أسبوعية (منتجات مجانية أو قسائم شراء).</p>
+                <div class="points-boxes">
+                    <div class="points-box default">
+                        <span data-i18n="visitPoint">زيارة صديق = 1 نقطة</span>
+                    </div>
+                    <div class="points-box primary">
+                        <span data-i18n="orderPoint">طلب منتج = 5 نقاط</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join as Merchant -->
+    <section class="bg-light">
+        <div class="container">
+            <div class="info-banner">
+                <h2 data-i18n="joinMerchant">هل أنت تاجر داخل إسرائيل؟</h2>
+                <p data-i18n="joinMerchantSub">اعرض منتجاتك ووصل إلى آلاف العملاء المهتمين بالشراء.</p>
+                <ul class="join-features-list">
+                    <li data-i18n="joinFeature0">✔ وصول إلى آلاف العملاء</li>
+                    <li data-i18n="joinFeature1">✔ طلبات حقيقية</li>
+                    <li data-i18n="joinFeature2">✔ الدفع عند الاستلام</li>
+                </ul>
+                <a href="#" class="btn btn-primary" data-i18n="joinButton">انضم كتاجر الآن</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Gimi - All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
