@@ -15,11 +15,34 @@
 </head>
 <body class="lang-ar">
 
-    <!-- Header -->
+    <!-- Header with Enhanced Features -->
     <header>
         <div class="container header-content">
             <a href="#" class="logo">Gimi</a>
+            
+            <!-- Search Bar -->
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="ابحث عن منتج..." data-i18n-placeholder="searchPlaceholder">
+                <button id="search-btn" class="search-btn">🔍</button>
+            </div>
+            
             <div class="controls">
+                <!-- Favorites Icon -->
+                <a href="#favorites" class="icon-link" id="favorites-icon" title="المفضلة">
+                    ❤️ <span id="favorites-count" class="badge">0</span>
+                </a>
+                
+                <!-- Shopping Cart Icon -->
+                <a href="#cart" class="icon-link" id="cart-icon" title="السلة">
+                    🛒 <span id="cart-count" class="badge">0</span>
+                </a>
+                
+                <!-- User Account Icon -->
+                <a href="#account" class="icon-link" id="account-icon" title="حسابي">
+                    👤
+                </a>
+                
+                <!-- Language Select -->
                 <select id="lang-select">
                     <option value="ar">العربية</option>
                     <option value="he">עברית</option>
@@ -28,12 +51,18 @@
                 </select>
             </div>
         </div>
+        
+        <!-- Notification Banner -->
+        <div id="notification-banner" class="notification-banner" style="display:none;">
+            <p id="notification-text"></p>
+            <button id="close-notification" class="close-btn">✕</button>
+        </div>
     </header>
 
     <!-- Hero -->
     <section class="hero">
         <div class="container">
-            <h1 data-i18n="heroTitle">منتجات التجار المحليين في إسرائيل</h1>
+            <h1 data-i18n="heroTitle">م��تجات التجار المحليين في إسرائيل</h1>
             <p data-i18n="heroSubtitle">مع توصيل للبيت والدفع عند الاستلام. تصفح واطلب بسهولة عبر واتساب.</p>
             <div class="hero-features">
                 <span data-i18n="feature0">✔ توصيل إلى المنزل</span>
@@ -67,14 +96,45 @@
         </div>
     </section>
 
-    <!-- All Products -->
+    <!-- All Products with Filter -->
     <section class="bg-light">
         <div class="container">
             <div class="text-center">
                 <h2 class="section-title" data-i18n="products">المنتجات</h2>
             </div>
+            
+            <!-- Filter Options -->
+            <div class="filter-section">
+                <select id="category-filter" data-i18n-placeholder="filterByCategory">
+                    <option value="">جميع الفئات</option>
+                    <option value="electronics">إلكترونيات</option>
+                    <option value="fashion">أزياء</option>
+                    <option value="food">غذاء</option>
+                    <option value="home">منزل</option>
+                </select>
+                
+                <select id="price-filter" data-i18n-placeholder="filterByPrice">
+                    <option value="">جميع الأسعار</option>
+                    <option value="0-50">0 - 50 ₪</option>
+                    <option value="50-100">50 - 100 ₪</option>
+                    <option value="100+">100+ ₪</option>
+                </select>
+            </div>
+            
             <div id="all-products-container" class="products-grid">
                 <!-- Products will be injected here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews/Ratings Section -->
+    <section>
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title" data-i18n="reviews">⭐ آراء العملاء</h2>
+            </div>
+            <div id="reviews-container" class="reviews-grid">
+                <!-- Reviews will be injected here -->
             </div>
         </div>
     </section>
@@ -92,6 +152,9 @@
                     <div class="points-box primary">
                         <span data-i18n="orderPoint">طلب منتج = 5 نقاط</span>
                     </div>
+                </div>
+                <div id="user-points" class="user-points" style="display:none;">
+                    <p>نقاطك الحالية: <span id="points-amount">0</span></p>
                 </div>
             </div>
         </div>
@@ -113,6 +176,51 @@
         </div>
     </section>
 
+    <!-- Shopping Cart Modal -->
+    <div id="cart-modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 data-i18n="shoppingCart">🛒 سلتي</h2>
+            <div id="cart-items" class="cart-items">
+                <p data-i18n="emptyCart">السلة فارغة</p>
+            </div>
+            <div id="cart-total" class="cart-total" style="display:none;">
+                <h3>الإجمالي: <span id="total-price">0</span> ₪</h3>
+                <button class="btn btn-primary" id="checkout-btn" data-i18n="checkout">اطلب الآن</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Favorites Modal -->
+    <div id="favorites-modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 data-i18n="favorites">❤️ المفضلة</h2>
+            <div id="favorites-items" class="favorites-items">
+                <p data-i18n="emptyFavorites">لا توجد منتجات مفضلة</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Account Modal -->
+    <div id="account-modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 data-i18n="myAccount">👤 حسابي</h2>
+            <div id="account-info" class="account-info">
+                <p id="login-prompt">
+                    <a href="#" id="login-link" data-i18n="loginHere">سجل دخولك هنا</a>
+                </p>
+            </div>
+            <div id="logged-in-info" style="display:none;">
+                <p>اسم المستخدم: <strong id="username"></strong></p>
+                <p>البريد الإلكتروني: <strong id="user-email"></strong></p>
+                <p>طلباتي: <strong id="orders-count">0</strong></p>
+                <button class="btn btn-secondary" id="logout-btn" data-i18n="logout">تسجيل خروج</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -124,5 +232,9 @@
     <script src="js/data.js"></script>
     <script src="js/i18n.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/favorites.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/account.js"></script>
 </body>
 </html>
